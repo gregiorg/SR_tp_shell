@@ -81,7 +81,7 @@ static char **split_in_words(char *line)
 		case ' ':
 		case '\t':
 			/* Ignore any whitespace */
-			cur++;<<<<<<<
+			cur++;
 			break;
 		case '<':
 			w = "<";
