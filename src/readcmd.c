@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, Simon Nieuviarts
+ * 2002, Simon Nieuviarts
  */
 
 #include <stdio.h>
@@ -45,7 +45,7 @@ static char *readline(void)
 		free(buf);
 		return NULL;
 	}
-	
+
 	if (feof(stdin)) { /* End of file (ctrl-d) */
 	    fflush(stdout);
 	    exit(0);
@@ -81,7 +81,7 @@ static char **split_in_words(char *line)
 		case ' ':
 		case '\t':
 			/* Ignore any whitespace */
-			cur++;
+			cur++;<<<<<<<
 			break;
 		case '<':
 			w = "<";

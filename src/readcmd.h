@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, Simon Nieuviarts
+ * 2002, Simon Nieuviarts
  */
 
 #ifndef __READCMD_H
