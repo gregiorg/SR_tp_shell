@@ -53,18 +53,22 @@ int main()
 				int inDesc, outDesc;
 
 				if (l->in) {
-					inDesc = Open(l->in, O_RDONLY, 0);
+					if ((inDesc = Open(l->in, O_RDONLY, 0)) == -1) {
+						perror(l->in);
+					}
 					Dup2(inDesc, STDIN);
 				}
 
 				if (l->out) {
 					mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-					outDesc = Open(l->out, O_CREAT | O_WRONLY, mode);
+					if ((outDesc = Open(l->out, O_CREAT | O_WRONLY, mode)) == -1) {
+						perror(l->in);
+					}
 					Dup2(outDesc, STDOUT);
 				}
 
 				if (execvp(l->seq[0][0], l->seq[0]) == -1) {
-					perror("Command error");
+					perror(l->seq[0][0]);
 					exit(-1);
 				}
 
