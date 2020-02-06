@@ -42,7 +42,7 @@ int main()
 		// 	printf("\n");
 		// }
 
-		if (strcmp(l->seq[0][0], "quit") == 0) {
+		if (strcmp(l->seq[0][0], "quit") == 0) { // Quitting sequence
 			printf("Quitting the shell ...\n");
 			printf("Hope you'll come back soon master ... UwU\n");
 			exit(0);
@@ -52,28 +52,28 @@ int main()
 			if ((pid = Fork()) == 0) { // child process
 				int inDesc, outDesc;
 
-				if (l->in) {
-					if ((inDesc = Open(l->in, O_RDONLY, 0)) == -1) {
-						perror(l->in);
+				if (l->in) { // change input if needed
+					if ((inDesc = Open(l->in, O_RDONLY, 0)) == -1) { // check if file can be opened
+						perror(l->in); // print error if file can't be opened
 					}
-					Dup2(inDesc, STDIN);
+					Dup2(inDesc, STDIN); // replace standard input
 				}
 
-				if (l->out) {
-					mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
-					if ((outDesc = Open(l->out, O_CREAT | O_WRONLY, mode)) == -1) {
-						perror(l->in);
+				if (l->out) {// change output if needed
+					mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH; // permisions if file needs to be created
+					if ((outDesc = Open(l->out, O_CREAT | O_WRONLY, mode)) == -1) { // check if file can be opened or creates file
+						perror(l->in); // print error if file can't be opened
 					}
-					Dup2(outDesc, STDOUT);
+					Dup2(outDesc, STDOUT); // replace standard output
 				}
 
-				if (execvp(l->seq[0][0], l->seq[0]) == -1) {
-					perror(l->seq[0][0]);
+				if (execvp(l->seq[0][0], l->seq[0]) == -1) { // exectutes the command
+					perror(l->seq[0][0]); // in case of error
 					exit(-1);
 				}
 
 			} else { // parent process
-				Wait(0);
+				Wait(0); // wait (what did you expect)
 			}
 		}
 	}
