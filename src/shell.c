@@ -13,12 +13,8 @@
 
 void sigchldHandler(int sig)
 {
-    pid_t pid;
 		int status;
-
-    if ((pid = waitpid(-1, &status, WNOHANG|WUNTRACED)) < 0) {
-        unix_error("waitpid error");
-		}
+    waitpid(-1, &status, WNOHANG|WUNTRACED);
     return;
 }
 
@@ -43,12 +39,13 @@ int main()
 		// 	printf("\n");
 		// }
 
+		/* If input stream closed, normal termination */
+		if (!l) {
+			printf("exit\n");
+			exit(0);
+		}
+
 		if (l->seq[0] != 0) {
-			/* If input stream closed, normal termination */
-			if (!l) {
-				printf("exit\n");
-				exit(0);
-			}
 
 			if (l->err) {
 				/* Syntax error, read another command */
