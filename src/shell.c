@@ -122,11 +122,10 @@ int main()
 						exit(-1);
 					}
 				}
-				close(pipes[i][1]);
+				close(pipes[i][1]);  // parent needs to close the pipes input on his side as well
+				int status;
+				waitpid(pids[i], &status, 0); // parent waits for current child process to finish
 			}
-			int status;
-			wait(&status);
-
 			// pid_t pid;
 			// if ((pid = Fork()) == 0) { // child proce((((ss
 			// 	int inDesc, outDesc;
