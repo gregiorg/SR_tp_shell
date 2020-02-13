@@ -36,7 +36,7 @@ static void *xrealloc(void *ptr, size_t size)
 
 
 /* Read a line from standard input and put it in a char[] */
-static char *readline(void)
+static char* readline(void)
 {
 	size_t buf_len = 16;
 	char *buf = xmalloc(buf_len * sizeof(char));
