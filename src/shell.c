@@ -11,8 +11,21 @@
 #define STDOUT 1
 #define STDERR 2
 
+void sigchldHandler(int sig)
+{
+    pid_t pid;
+		int status;
+
+    if ((pid = waitpid(-1, &status, WNOHANG|WUNTRACED)) < 0) {
+        unix_error("waitpid error");
+		}
+    return;
+}
+
 int main()
 {
+	Signal(SIGCHLD, sigchldHandler);
+
 	while (1) {
 		struct cmdline *l;
 
