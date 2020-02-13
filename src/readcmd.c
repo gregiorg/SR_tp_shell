@@ -190,6 +190,7 @@ struct cmdline *readcmd(void)
 	s->out = 0;
 	s->seq = 0;
 
+	s->async = 0; // set to synchrone
 	i = 0;
 	while ((w = words[i++]) != 0) {
 		switch (w[0]) {
@@ -231,6 +232,10 @@ struct cmdline *readcmd(void)
 			cmd = xmalloc(sizeof(char *));
 			cmd[0] = 0;
 			cmd_len = 0;
+			break;
+
+		case '&':
+			s->async = 1;
 			break;
 		default:
 			cmd = xrealloc(cmd, (cmd_len + 2) * sizeof(char *));
