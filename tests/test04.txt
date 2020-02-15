@@ -1,5 +1,5 @@
 #
-# test06.txt - Redirection d'entrée/sortie
+# test04.txt - Redirection d'entrée/sortie
 #
 cat < Makefile
 echo

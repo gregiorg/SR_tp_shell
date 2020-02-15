@@ -1,5 +1,5 @@
 #
-# test07.txt - gestion d'erreur
+# test05.txt - gestion d'erreur
 #
 zofiz
 echo
