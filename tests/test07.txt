@@ -1,0 +1,4 @@
+#
+# test08.txt - commande composé de plusieurs commandes reliées par des tubes
+#
+ls -l | grep s | wc

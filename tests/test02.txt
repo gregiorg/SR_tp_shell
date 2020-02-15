@@ -1,4 +1,5 @@
 #
-# test02.txt - Exécuter une commande sans argument
+# test01.txt - Tester la commande quit
 #
-ls
+quit
+WAIT

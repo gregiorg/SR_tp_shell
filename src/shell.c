@@ -12,7 +12,7 @@
 #define STDERR 2
 
 void sigchldHandler(int sig)
-{
+{ // death of the zombie child
 		int status;
     waitpid(-1, &status, WNOHANG|WUNTRACED);
     return;
@@ -20,7 +20,7 @@ void sigchldHandler(int sig)
 
 int main()
 {
-	Signal(SIGCHLD, sigchldHandler);
+	Signal(SIGCHLD, sigchldHandler); // zombie processing
 
 	while (1) {
 		struct cmdline *l;
@@ -45,7 +45,7 @@ int main()
 			exit(0);
 		}
 
-		if (l->seq[0] != 0) {
+		if (l->seq[0] != 0) { // if commande line is empty then just print a new line
 
 			if (l->err) {
 				/* Syntax error, read another command */
@@ -78,7 +78,7 @@ int main()
 				}
 
 
-				for (int i = 0; i < nbCmd; i++) {
+				for (int i = 0; i < nbCmd; i++) { // for each commande on the line
 					pids[i] = Fork();
 
 					if (!pids[i]) { // child process
@@ -131,6 +131,8 @@ int main()
 							exit(-1);
 						}
 					}
+					// parent process
+
 					if (nbCmd > 1 && i < nbCmd-1) {
 						close(pipes[i][1]);  // parent needs to close the pipes input on his side as well
 					}

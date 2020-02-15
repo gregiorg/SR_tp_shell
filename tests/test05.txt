@@ -1,0 +1,9 @@
+#
+# test07.txt - gestion d'erreur
+#
+zofiz
+echo
+touch noAcces.txt
+chmod 000 noAcces.txt
+cat < noAcces.txt
+rm noAcces.txt

@@ -1,6 +1,6 @@
 #
-# test03.txt - Exécuter une succession de commandes sans argument
+# test05.txt - Exécuter des commandes avec arguments
 #
-ls
+ls -a
 echo
-ls
+ls -l
